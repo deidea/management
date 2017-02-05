@@ -17,8 +17,8 @@ class CreateTimesTable extends Migration
             $table->integer('project_id');
             $table->integer('user_id');
             $table->text('description');
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->timestamp('start')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('end')->nullable()->default(null);
             $table->timestamps();
         });
     }

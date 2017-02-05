@@ -44,8 +44,8 @@ $factory->define(App\Time::class, function (Faker\Generator $faker) {
 		'user_id' => rand(1, 10),
 		'project_id' => rand(1, 10),
 		'description' => $faker->sentence,
-		'start' => $faker->dateTime(),
-		'end' => $faker->dateTime(),
+		'start' => \Carbon\Carbon::now(),
+		'end' =>  \Carbon\Carbon::now()->addHour(1),
 
     ];
 });

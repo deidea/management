@@ -4,6 +4,7 @@
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr class="info">
+					<th width="10"></th>
 					<th>Name</th>
 					<th>Customer</th>
 					<th class="action-column">
@@ -14,6 +15,13 @@
 			<tbody>
 				@foreach ($projects as $project)
 					<tr>
+						<td>
+							@if ($project->time->isEmpty())
+								{{ link_to_action('TimeController@start', 'Start', $project->id, ['class' => 'btn btn-success btn-xs']) }}
+							@else
+								{{ link_to_action('TimeController@stop', 'Stop', $project->time->first()->id, ['class' => 'btn btn-danger btn-xs']) }}
+							@endif
+						</td>
 						<td>{{ $project->name }}</td>
 						<td>{{ link_to_action('CustomerController@show', $project->customer->name, $project->customer->id) }}</td>
 						<td>
@@ -34,5 +42,5 @@
 		</table>
 	</div>
 
-	{{ $projects->links() }}
+	@{{ $projects->links() }}
 @endsection

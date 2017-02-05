@@ -20,6 +20,11 @@ Route::get('/', function () {
 	return redirect('login');
 });
 
+Route::resource('times', 'TimeController');
+Route::get('times/{project}/start', 'TimeController@start');
+Route::get('times/{time}/stop', 'TimeController@stop');
+Route::get('times/{time}/delete', 'TimeController@delete');
+
 Route::resource('customers', 'CustomerController');
 Route::get('customers/{customer}/delete', 'CustomerController@delete');
 

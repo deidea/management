@@ -6,21 +6,34 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Project;
+use App\Time;
+use Carbon\Carbon;
+use Auth;
 
-class ProjectController extends Controller
+class TimeController extends Controller
 {
-	private $resultsPerPage;
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function start(Project $project)
+    {
+		$project->times()->create([]);
+		return redirect('projects');
+    }
 
 	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->middleware('auth');
-		$this->resultsPerPage = 30;
-	}
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function stop(Time $time)
+    {
+		$time->end = Carbon::now();
+		$time->update();
+		return redirect('projects');
+    }
 
     /**
      * Display a listing of the resource.
@@ -29,25 +42,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-		$projects = Project::with('customer')->with('times')
-			->paginate($this->resultsPerPage)
-			->sortByDesc(function($project) {
-	    		return $project->times->sortByDesc('start')->first();
-			})
-			->map(function ($item, $key) {
-			     $item->time = $item->times->filter(function ($value, $key) {
-    	 			return $value->end === null;
-				});
-
-				 return $item;
-			});
-
-
-
-
-		return view('projects.index')->with([
-			'projects' => $projects,
-		]);
+        //
     }
 
     /**
@@ -101,17 +96,6 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for deleting the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
     {
         //
     }
