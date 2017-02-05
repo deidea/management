@@ -27,11 +27,33 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Contact::class, function (Faker\Generator $faker) {
+    return [
+		'customer_id' => rand(1, 10),
+		'first_name' => $faker->firstName,
+		'last_name' => $faker->lastName,
+		'telephone' => $faker->phoneNumber,
+		'fax' => $faker->phoneNumber,
+		'email' => $faker->email,
+		'birthday' => $faker->date,
+    ];
+});
+
+$factory->define(App\Time::class, function (Faker\Generator $faker) {
+    return [
+		'user_id' => rand(1, 10),
+		'project_id' => rand(1, 10),
+		'description' => $faker->sentence,
+		'start' => $faker->dateTime(),
+		'end' => $faker->dateTime(),
+
+    ];
+});
+
 $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     return [
+        'short' => $faker->word,
         'name' => $faker->company,
-        'email' => $faker->safeEmail,
-        'telephone' => $faker->phoneNumber,
-        'contact_person' => $faker->name,
+        'homepage' => $faker->url,
     ];
 });

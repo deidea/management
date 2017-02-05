@@ -23,4 +23,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+	/**
+     * Get the times for the user.
+     */
+    public function times()
+    {
+        return $this->hasMany('App\Time');
+    }
 }

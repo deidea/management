@@ -13,12 +13,14 @@ class UsersTableSeeder extends Seeder
     {
 		$users = [
 			[
-				'name' => 'Karol',
+				'name' => 'Deidea',
 				'email' => 'test@test.test',
 				'password' => bcrypt('test'),
 			],
 		];
 
 		DB::table('users')->insert($users);
+
+		factory(App\User::class, 9)->create();
     }
 }

@@ -19,10 +19,18 @@ class Customer extends Model
 	];
 
 	/**
-     * Get the project for the customer.
+     * Get the projects for the customer.
      */
     public function projects()
     {
         return $this->hasMany('App\Project');
+    }
+
+	/**
+     * Get the contacts for the customer.
+     */
+    public function contacts()
+    {
+        return $this->hasMany('App\Contact');
     }
 }

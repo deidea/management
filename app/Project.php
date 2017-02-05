@@ -23,4 +23,12 @@ class Project extends Model
     {
         return $this->belongsTo('App\Customer');
     }
+
+	/**
+     * Get the times for the project.
+     */
+    public function times()
+    {
+        return $this->hasMany('App\Time');
+    }
 }
