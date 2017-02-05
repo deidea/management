@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('short');
             $table->string('name');
-            $table->string('homepage');
+            $table->string('website');
             $table->timestamps();
         });
     }

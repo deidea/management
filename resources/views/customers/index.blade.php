@@ -19,7 +19,7 @@
 					<tr>
 						<td>{{ $customer->short }}</td>
 						<td>{{ $customer->name }}</td>
-						<td>{{ link_to($customer->homepage, 'Homepage', ['targer' => '_blank']) }}</td>
+						<td>{{ link_to($customer->website, 'Website', ['target' => '_blank']) }}</td>
 						<td>{{ $customer->projects->count() }}</td>
 						<td>{{ $customer->contacts->count() }}</td>
 						<td>

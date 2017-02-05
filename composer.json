@@ -22,7 +22,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+	    "files": [
+	        "app/Helpers/formHelper.php"
+	    ]
     },
     "autoload-dev": {
         "classmap": [

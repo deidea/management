@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Customer;
+use App\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {
+	private $resultsPerPage;
 	/**
 	 * Create a new controller instance.
 	 *
@@ -17,6 +19,8 @@ class CustomerController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
+
+		$this->resultsPerPage = 30;
 	}
 
     /**
@@ -26,8 +30,12 @@ class CustomerController extends Controller
      */
     public function index()
     {
+		$customers = Customer::with('projects')
+			->with('contacts')
+			->paginate($this->resultsPerPage);
+
 		return view('customers.index')->with([
-			'customers' => Customer::with('projects')->paginate(30),
+			'customers' => $customers,
 		]);
     }
 
@@ -38,18 +46,20 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+		return view('customers.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CustomerRequest $request
+     * @param  Customer $customer
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request, Customer $customer)
     {
-        //
+		$customer->create($request->all());
+		return redirect('customers');
     }
 
     /**
@@ -68,24 +78,27 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Customer $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Customer $customer)
     {
-        //
+		return view('customers.edit')->with([
+			'customer' => $customer,
+		]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  CustomerRequest $request
+     * @param  Customer $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        //
+		$customer->update($request->all());
+		return redirect('customers');
     }
 
     /**

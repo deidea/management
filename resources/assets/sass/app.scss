@@ -1,12 +1,18 @@
-table {
-	thead {
-		tr {
-			th {
-				&.action-column {
-					width: 10px;
-					text-align: center;
+html {
+	overflow-y: scroll;
+	
+	body {
+		table {
+			thead {
+				tr {
+					th {
+						&.action-column {
+							width: 10px;
+							text-align: center;
+						}
+					}
 				}
 			}
 		}
 	}
-}
+	}

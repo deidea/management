@@ -12,10 +12,9 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
+		'short',
 		'name',
-		'email',
-		'telephone',
-		'contact_person',
+		'website',
 	];
 
 	/**

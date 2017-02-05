@@ -54,6 +54,6 @@ $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     return [
         'short' => $faker->word,
         'name' => $faker->company,
-        'homepage' => $faker->url,
+        'website' => $faker->url,
     ];
 });
